@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -65,14 +66,14 @@ class Anime extends Model
         return $this->hasOne(Broadcast::class, 'anime_id', 'mal_id');
     }
 
-    public function animeStatus(): HasOne
+    public function animeStatus(): BelongsTo
     {
-        return $this->hasOne(SettingAttributeValue::class, 'id', 'status');
+        return $this->belongsTo(SettingAttributeValue::class, 'status', 'id');
     }
 
-    public function animeType(): HasOne
+    public function animeType(): BelongsTo
     {
-        return $this->hasOne(SettingAttributeValue::class, 'id', 'type');
+        return $this->belongsTo(SettingAttributeValue::class, 'type', 'id');
     }
 
     public function producers()
