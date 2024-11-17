@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Http;
 
 class AnimeService
 {
-    protected $apiUrl = 'https://api.jikan.moe/v4/top/anime?type=ova';
+    protected $apiUrl = env('ANIME_API_PATH', 'https://api.jikan.moe/v4/top/anime?type=ova');
 
     /**
      * Fetch data from Jikan API.

@@ -24,7 +24,7 @@ This project consists of an application with two main functionalities:
 3. **Set Up Environment Variables**
    ```bash
    cp .env.example .env
-- Open the .env file in a text editor and set up your database details
+- Open the .env file in a text editor and set up your database details and other setting
    ```bash
     DB_CONNECTION=mysql
     DB_HOST=127.0.0.1
@@ -32,7 +32,10 @@ This project consists of an application with two main functionalities:
     DB_DATABASE=laravel
     DB_USERNAME=root
     DB_PASSWORD=
-- Replace laravel, root, and your_password with your actual database name, username, and password.
+
+
+    ANIME_API_PATH='https://api.jikan.moe/v4/top/anime?type=ova'
+- Replace laravel, root, and your_password with your actual database name, username, and password for database  and other setting as you need.
 
 4. **SGenerate Application Key**
    ```bash
@@ -53,5 +56,5 @@ This project consists of an application with two main functionalities:
     php artisan fetch:top-ova-anime
 
 8. **Testing API Path**
- ```bash
+   ```bash
     http://127.0.0.1:8000/api/anime/Monster
