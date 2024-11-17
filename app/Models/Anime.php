@@ -23,6 +23,15 @@ class Anime extends Model
         });
     }
 
+    protected function getRoleId($role_key, $role_value)
+    {
+        return SettingAttribute::where('name', $role_key)
+                    ->first()
+                    ?->settingAttributeValue()
+                    ->where('value', $role_value)
+                    ->value('id') ?? '';
+    }
+
     public function images(): MorphMany
     {
         return $this->morphMany(Image::class, 'imageable');
@@ -68,36 +77,35 @@ class Anime extends Model
 
     public function producers()
     {
-        $producer_attribute = SettingAttribute::where('name', 'anime_company_role')->first();
-        $value = SettingAttributeValue::where('setting_attribute_id', $producer_attribute->id)->where('value', 'producers')->first();
-        return $this->companies()->withPivotValue('role', $value->id ?? '');
+        return $this->companies()->withPivotValue('role', $this->getRoleId('anime_company_role', 'producers'));
     }
 
     public function licensors()
     {
-        $producer_attribute = SettingAttribute::where('name', 'anime_company_role')->first();
-        $value = SettingAttributeValue::where('setting_attribute_id', $producer_attribute->id)->where('value', 'producers')->first();
-        return $this->companies()->withPivotValue('role', $value->id ?? '');
+        return $this->companies()->withPivotValue('role', $this->getRoleId('anime_company_role', 'licensors'));
     }
 
     public function studios()
     {
-        $producer_attribute = SettingAttribute::where('name', 'anime_company_role')->first();
-        $value = SettingAttributeValue::where('setting_attribute_id', $producer_attribute->id)->where('value', 'studios')->first();
-        return $this->companies()->withPivotValue('role', $value->id ?? '');
+        return $this->companies()->withPivotValue('role', $this->getRoleId('anime_company_role', 'studios'));
     }
 
     public function genres_list()
     {
-        $producer_attribute = SettingAttribute::where('name', 'anime_genre_role')->first();
-        $value = SettingAttributeValue::where('setting_attribute_id', $producer_attribute->id)->where('value', 'genres')->first();
-        return $this->genres()->withPivotValue('role', $value->id ?? '');
+        return $this->genres()->withPivotValue('role', $this->getRoleId('anime_genre_role', 'genres'));
     }
-    public function explicit_genres()
+    public function explicitGenres()
     {
-        $producer_attribute = SettingAttribute::where('name', 'anime_genre_role')->first();
-        $value = SettingAttributeValue::where('setting_attribute_id', $producer_attribute->id)->where('value', 'explicit_genres')->first();
-        return $this->genres()->withPivotValue('role', $value->id ?? '');
+        return $this->genres()->withPivotValue('role', $this->getRoleId('anime_genre_role', 'explicit_genres'));
+    }
+
+    public function themes()
+    {
+        return $this->genres()->withPivotValue('role', $this->getRoleId('anime_genre_role', 'themes'));
+    }
+    public function demographics()
+    {
+        return $this->genres()->withPivotValue('role', $this->getRoleId('anime_genre_role', 'demographics'));
     }
 
 }
