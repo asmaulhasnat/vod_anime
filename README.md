@@ -48,12 +48,12 @@ This project consists of an application with two main functionalities:
 6. **Fetch Anime Data**
   - Use the following command to fetch the 25 most popular anime from the Jikan API and save it in the database. For more data  run this command multiple times.
     ```bash
-    php artisan fetch:top-ova-anime
+   php artisan fetch:top-ova-anime
 
 7. **Run the Server**
 - To start the application, run the Laravel development server:
   ```bash
-    php artisan fetch:top-ova-anime
+   php artisan serve
 
 8. **Testing API Path**
    ```bash
