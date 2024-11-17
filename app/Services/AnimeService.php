@@ -12,8 +12,6 @@ use Illuminate\Support\Facades\Http;
 
 class AnimeService
 {
-    protected $apiUrl = env('ANIME_API_PATH', 'https://api.jikan.moe/v4/top/anime?type=ova');
-
     /**
      * Fetch data from Jikan API.
      *
@@ -23,7 +21,7 @@ class AnimeService
     {
         try {
             $page = $this->get_next_page('page');
-            $response = Http::get($this->apiUrl, ['page' => $page]);
+            $response = Http::get(env('ANIME_API_PATH', 'https://api.jikan.moe/v4/top/anime?type=ova'), ['page' => $page]);
 
             if ($response->successful()) {
                 $page = $this->get_next_page('page', $page + 1);
