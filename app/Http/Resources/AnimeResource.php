@@ -153,7 +153,7 @@ class AnimeResource extends JsonResource
 
             foreach ($companies as $company) {
 
-                $new_companies[] = ['mal_id' => $company->mal_id,'type' => $this->getSettingValueByKey($company->type),'name' => $company->name, 'url' => url('api/anime/producer/'.$company->mal_id.'/'.$company->name)];
+                $new_companies[] = ['mal_id' => $company->mal_id,'type' => $this->getSettingValueByKey($company->type),'name' => $company->name, 'url' => url('api/anime/producer/'.$company->mal_id.'/'.$company->slug)];
             }
 
         }
@@ -170,7 +170,7 @@ class AnimeResource extends JsonResource
 
             foreach ($genres as $genre) {
                 $type = $this->getSettingValueByKey($genre->type);
-                $new_genres[] = ['mal_id' => $genre->mal_id,'type' =>  $type,'name' => $genre->name,'url' => url('api/anime/genre/'.$genre->mal_id.'/'.$genre->name)];
+                $new_genres[] = ['mal_id' => $genre->mal_id,'type' =>  $type,'name' => $genre->name,'url' => url('api/anime/genre/'.$genre->mal_id.'/'.$genre->slug)];
             }
         }
 
